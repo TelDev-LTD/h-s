@@ -133,6 +133,7 @@ const galleryImages = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
+  setupHomeIntro();
   setupNavigation();
   setupCountdown();
   setupGallery();
@@ -142,6 +143,42 @@ document.addEventListener("DOMContentLoaded", () => {
   setupRsvpDeadline();
   setupReveal();
 });
+
+function setupHomeIntro() {
+  const body = document.body;
+  const overlay = document.querySelector("[data-intro-overlay]");
+  const trigger = document.querySelector("[data-intro-trigger]");
+
+  if (!body.hasAttribute("data-home-intro") || !overlay || !trigger) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let hasOpened = false;
+
+  const finishIntro = () => {
+    overlay.classList.add("is-hidden");
+    body.classList.add("intro-complete");
+    body.classList.remove("intro-opening");
+  };
+
+  trigger.addEventListener("click", () => {
+    if (hasOpened) return;
+    hasOpened = true;
+    body.classList.add("intro-opening");
+
+    const revealDelay = reducedMotion ? 700 : 3400;
+    const completeDelay = reducedMotion ? 1300 : 4700;
+
+    window.setTimeout(() => {
+      const poster = document.querySelector("[data-intro-poster]");
+      if (poster) {
+        poster.setAttribute("tabindex", "-1");
+        poster.focus();
+      }
+    }, revealDelay);
+
+    window.setTimeout(finishIntro, completeDelay);
+  });
+}
 
 function setupNavigation() {
   const toggle = document.querySelector("[data-nav-toggle]");

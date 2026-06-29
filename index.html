@@ -10,7 +10,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body style="--hero-image: url('Harold & Somadina/JH Intro-64.jpg');">
+<body data-home-intro>
+  <div class="intro-overlay" data-intro-overlay>
+    <div class="intro-backdrop"></div>
+    <div class="intro-stage">
+      <div class="intro-envelope" data-envelope>
+        <button class="intro-seal" type="button" data-intro-trigger aria-label="Open invitation">
+          <span>S&amp;O</span>
+        </button>
+        <div class="intro-envelope-left"></div>
+        <div class="intro-envelope-right"></div>
+        <div class="intro-envelope-top"></div>
+        <div class="intro-invitation" data-intro-poster>
+          <div class="intro-invitation-photo">
+            <img src="Harold &amp; Somadina/JH Intro-96.jpg" alt="Somadina and Ofure">
+          </div>
+          <div class="intro-invitation-copy">
+            <p class="intro-kicker">Kindly join us</p>
+            <p class="intro-script">Somadina &amp; Ofure</p>
+            <p class="intro-date">27 November 2026</p>
+            <p class="intro-place">Lagos, Nigeria</p>
+            <p class="intro-verse">&ldquo;And the two shall become one flesh.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+      <p class="intro-prompt">Tap the seal to open</p>
+    </div>
+  </div>
   <header class="site-header">
     <nav class="nav" aria-label="Main navigation">
       <a class="brand" href="index.html"><span class="monogram">S&amp;O</span><span>Somadina &amp; Ofure</span></a>
@@ -29,6 +55,7 @@
 
   <main>
     <section class="hero">
+      <img class="hero-media" src="Harold &amp; Somadina/WhatsApp Image 2026-06-24 at 17.33.22 (1).jpeg" alt="Somadina and Ofure">
       <div class="hero-inner">
         <p class="eyebrow">#SOinlove</p>
         <h1>Somadina &amp; Ofure</h1>
@@ -64,7 +91,9 @@
     </section>
 
     <section class="section grid grid-2">
-      <div class="feature-image reveal" aria-hidden="true"></div>
+      <div class="feature-image reveal">
+        <img src="Harold &amp; Somadina/JH Intro-96.jpg" alt="Somadina and Ofure">
+      </div>
       <div class="reveal">
         <div class="section-title">
           <p class="eyebrow">Our Story</p>
