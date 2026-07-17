@@ -148,23 +148,12 @@ function setupEnvelopeGate() {
   const gate = document.querySelector("[data-envelope-gate]");
   if (!gate) return;
 
-  const STORAGE_KEY = "envelopeOpened";
   const root = document.documentElement;
-
-  if (sessionStorage.getItem(STORAGE_KEY) === "1") {
-    gate.setAttribute("hidden", "");
-    return;
-  }
 
   root.classList.add("gate-active");
 
   const openGate = () => {
     if (gate.classList.contains("is-leaving")) return;
-    try {
-      sessionStorage.setItem(STORAGE_KEY, "1");
-    } catch {
-      /* private browsing or storage disabled: gate simply reshows on next load */
-    }
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
