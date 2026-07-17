@@ -32,12 +32,6 @@ const galleryImages = [
   "Harold & Somadina/JH Intro-338.jpg",
   "Harold & Somadina/JH Intro-337.jpg",
   "Harold & Somadina/JH Intro-342.jpg",
-  "Harold & Somadina/JH Intro-101.jpg",
-  "Harold & Somadina/JH Intro-102.jpg",
-  "Harold & Somadina/JH Intro-103.jpg",
-  "Harold & Somadina/JH Intro-104.jpg",
-  "Harold & Somadina/JH Intro-127.jpg",
-  "Harold & Somadina/JH Intro-128.jpg",
   "Harold & Somadina/JH Intro-137.jpg",
   "Harold & Somadina/JH Intro-161.jpg",
   "Harold & Somadina/JH Intro-162.jpg",
@@ -78,34 +72,17 @@ const galleryImages = [
   "Harold & Somadina/JH Intro-224.jpg",
   "Harold & Somadina/JH Intro-225.jpg",
   "Harold & Somadina/JH Intro-226.jpg",
-  "Harold & Somadina/JH Intro-227.jpg",
-  "Harold & Somadina/JH Intro-228.jpg",
-  "Harold & Somadina/JH Intro-229.jpg",
-  "Harold & Somadina/JH Intro-230.jpg",
-  "Harold & Somadina/JH Intro-231.jpg",
-  "Harold & Somadina/JH Intro-232.jpg",
-  "Harold & Somadina/JH Intro-233.jpg",
-  "Harold & Somadina/JH Intro-234.jpg",
-  "Harold & Somadina/JH Intro-235.jpg",
   "Harold & Somadina/JH Intro-250.jpg",
-  "Harold & Somadina/JH Intro-251.jpg",
   "Harold & Somadina/JH Intro-252.jpg",
   "Harold & Somadina/JH Intro-253.jpg",
-  "Harold & Somadina/JH Intro-254.jpg",
-  "Harold & Somadina/JH Intro-255.jpg",
-  "Harold & Somadina/JH Intro-330.jpg",
   "Harold & Somadina/JH Intro-331.jpg",
   "Harold & Somadina/JH Intro-332.jpg",
   "Harold & Somadina/JH Intro-333.jpg",
   "Harold & Somadina/JH Intro-334.jpg",
   "Harold & Somadina/JH Intro-335.jpg",
   "Harold & Somadina/JH Intro-336.jpg",
-  "Harold & Somadina/JH Intro-337.jpg",
-  "Harold & Somadina/JH Intro-338.jpg",
-  "Harold & Somadina/JH Intro-339.jpg",
   "Harold & Somadina/JH Intro-340.jpg",
   "Harold & Somadina/JH Intro-341.jpg",
-  "Harold & Somadina/JH Intro-342.jpg",
   "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.22 (1).jpeg",
   "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.22 (2).jpeg",
   "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.22.jpeg",
@@ -149,17 +126,17 @@ function setupEnvelopeGate() {
   if (!gate) return;
 
   const root = document.documentElement;
+  const target = gate.dataset.gateTarget || "home.html";
 
   root.classList.add("gate-active");
 
   const openGate = () => {
     if (gate.classList.contains("is-leaving")) return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     gate.classList.add("is-leaving");
-    root.classList.remove("gate-active");
-    setTimeout(() => gate.setAttribute("hidden", ""), prefersReducedMotion ? 0 : 600);
+    // The actual cross-page fade is handled natively by the browser's
+    // view-transition crossfade (see @view-transition in styles.css),
+    // so we navigate right away instead of fading out manually first.
+    window.location.href = target;
   };
 
   gate.addEventListener("click", openGate);
@@ -221,14 +198,7 @@ function setupCountdown() {
 
 function setupGallery() {
   const gallery = document.querySelector("[data-gallery]");
-  const preview = document.querySelector("[data-gallery-preview]");
   const uniqueImages = [...new Set(galleryImages)];
-
-  if (preview) {
-    preview.innerHTML = uniqueImages.slice(0, 4).map((src) => (
-      `<img src="${src}" alt="Somadina and Ofure gallery preview" loading="lazy">`
-    )).join("");
-  }
 
   if (!gallery) return;
 
