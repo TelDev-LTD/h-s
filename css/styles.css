@@ -757,4 +757,109 @@ h3 {
   .site-header {
     transition: none;
   }
+
+  .envelope-gate {
+    transition: none;
+  }
+}
+
+/* Envelope entrance gate */
+html.gate-active,
+html.gate-active body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.envelope-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  height: 100vh;
+  height: 100svh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--burgundy);
+  color: var(--ivory);
+  cursor: pointer;
+  transition: opacity 0.6s ease;
+}
+
+.envelope-gate::before {
+  content: "";
+  position: absolute;
+  inset: -24px;
+  z-index: 0;
+  background-image: url('../assets/background_texture.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(7px);
+  transform: scale(1.04);
+}
+
+.envelope-gate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(58, 16, 26, 0.45);
+}
+
+.envelope-gate[hidden] {
+  display: none;
+}
+
+.envelope-gate.is-leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.envelope-gate-inner {
+  position: relative;
+  z-index: 2;
+  margin: auto;
+  width: min(99vw, 2250px);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(4px, 0.6vh, 10px) 16px;
+  text-align: center;
+}
+
+.envelope-gate-inner:focus-visible {
+  outline: 2px solid var(--metallic-gold);
+  outline-offset: 6px;
+}
+
+.envelope-eyebrow,
+.envelope-cta {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.envelope-eyebrow {
+  margin: 0 0 clamp(0px, 0.3vh, 4px);
+  color: var(--metallic-gold);
+  font-size: clamp(1.8rem, 4.6vh, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.envelope-visual {
+  flex-shrink: 0;
+  width: min(100vmin, 2200px);
+  height: auto;
+  max-width: 100%;
+}
+
+.envelope-cta {
+  margin: clamp(4px, 1vh, 16px) 0 0;
+  font-size: clamp(0.75rem, 2vh, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 249, 239, 0.78);
 }

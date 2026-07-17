@@ -133,6 +133,7 @@ const galleryImages = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
+  setupEnvelopeGate();
   setupNavigation();
   setupCountdown();
   setupGallery();
@@ -142,6 +143,44 @@ document.addEventListener("DOMContentLoaded", () => {
   setupRsvpDeadline();
   setupReveal();
 });
+
+function setupEnvelopeGate() {
+  const gate = document.querySelector("[data-envelope-gate]");
+  if (!gate) return;
+
+  const STORAGE_KEY = "envelopeOpened";
+  const root = document.documentElement;
+
+  if (sessionStorage.getItem(STORAGE_KEY) === "1") {
+    gate.setAttribute("hidden", "");
+    return;
+  }
+
+  root.classList.add("gate-active");
+
+  const openGate = () => {
+    if (gate.classList.contains("is-leaving")) return;
+    try {
+      sessionStorage.setItem(STORAGE_KEY, "1");
+    } catch {
+      /* private browsing or storage disabled: gate simply reshows on next load */
+    }
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    gate.classList.add("is-leaving");
+    root.classList.remove("gate-active");
+    setTimeout(() => gate.setAttribute("hidden", ""), prefersReducedMotion ? 0 : 600);
+  };
+
+  gate.addEventListener("click", openGate);
+  gate.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openGate();
+    }
+  });
+}
 
 function setupNavigation() {
   const toggle = document.querySelector("[data-nav-toggle]");
