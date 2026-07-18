@@ -874,7 +874,7 @@ html.gate-active body {
   position: absolute;
   inset: -24px;
   z-index: 0;
-  background-image: url('../assets/background_texture.png');
+  background-image: url('../assets/background_texture.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1304,7 +1304,7 @@ body.welcome-page .site-header {
   position: absolute;
   inset: -20px;
   z-index: 0;
-  background-image: url('../assets/background_texture.png');
+  background-image: url('../assets/background_texture.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
