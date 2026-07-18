@@ -454,6 +454,199 @@ h3 {
   right: 14px;
 }
 
+/* Our Story page: scattered photo pile + "Open Gallery" trigger */
+.story-gallery-head {
+  text-align: center;
+}
+
+.story-gallery-head h2 {
+  margin-top: 6px;
+}
+
+.story-gallery-head .gold-divider {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.story-gallery-head .btn {
+  margin-top: 20px;
+}
+
+.story-scatter {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 56px auto 12px;
+  height: clamp(460px, 62vw, 620px);
+}
+
+.story-polaroid {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  z-index: var(--z);
+  width: clamp(64px, 17%, 150px);
+  padding: 8px 8px 24px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--white);
+  box-shadow: 0 14px 30px rgba(20, 6, 10, 0.28);
+  cursor: pointer;
+  transform: rotate(var(--r));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.story-polaroid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 1px;
+}
+
+.story-polaroid:hover,
+.story-polaroid:focus-visible {
+  transform: rotate(var(--r)) scale(1.14) translateY(-4px);
+  box-shadow: 0 24px 46px rgba(20, 6, 10, 0.42);
+  z-index: 20;
+}
+
+/* In-page photo viewer (triggered by "Open Gallery" and by clicking any
+   scattered photo). Same visual language as the .lightbox component, with
+   an added bottom filmstrip of thumbnails to browse the full gallery. */
+.photo-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 0 0;
+  background: rgba(10, 4, 6, 0.95);
+}
+
+.photo-viewer.open {
+  display: flex;
+}
+
+.photo-viewer-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 70px;
+}
+
+.photo-viewer-stage img {
+  max-width: min(100%, 1120px);
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.photo-viewer button {
+  position: absolute;
+  border: 1px solid rgba(255, 249, 239, 0.28);
+  border-radius: 50%;
+  color: var(--ivory);
+  background: rgba(255, 249, 239, 0.1);
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s ease;
+}
+
+.photo-viewer button:hover {
+  background: rgba(255, 249, 239, 0.22);
+}
+
+.photo-viewer-close {
+  top: 18px;
+  right: 18px;
+  width: 46px;
+  height: 46px;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.photo-viewer-prev,
+.photo-viewer-next {
+  top: 45%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.photo-viewer-prev {
+  left: 16px;
+}
+
+.photo-viewer-next {
+  right: 16px;
+}
+
+.photo-viewer-strip {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.viewer-thumb {
+  flex: 0 0 auto;
+  width: 74px;
+  height: 74px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.viewer-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.viewer-thumb:hover {
+  opacity: 0.85;
+}
+
+.viewer-thumb.active {
+  opacity: 1;
+  border-color: var(--metallic-gold);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 640px) {
+  .photo-viewer-stage {
+    padding: 0 54px;
+  }
+
+  .photo-viewer-prev,
+  .photo-viewer-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  .viewer-thumb {
+    width: 58px;
+    height: 58px;
+  }
+}
+
 .toast {
   position: fixed;
   left: 50%;
@@ -1074,4 +1267,420 @@ html.gate-active body {
   .rsvp-story-grid {
     gap: 32px;
   }
+}
+
+/* Welcome page: single-viewport alternative homepage design */
+body.welcome-page {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+body.welcome-page .site-header {
+  flex: 0 0 auto;
+}
+
+.welcome-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.welcome-hero {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  background: var(--burgundy);
+  color: var(--ivory);
+}
+
+.welcome-hero::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: 0;
+  background-image: url('../assets/background_texture.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.16;
+  filter: blur(2px);
+}
+
+.welcome-hero-flower {
+  position: absolute;
+  z-index: 0;
+  bottom: -8%;
+  left: -3%;
+  width: clamp(90px, 16vw, 220px);
+  max-width: none;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/* Large central bouquet: bridges the gap between the text column and the
+   card cluster on wide screens so the middle of the hero never reads as
+   empty. Hidden on the narrow single-column stack, where there's no gap
+   to bridge. */
+.welcome-hero-bouquet {
+  display: none;
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  max-width: none;
+  opacity: 0.4;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(-6deg);
+}
+
+.welcome-hero-inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  max-width: min(1600px, 96%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.8vh, 20px);
+  padding: clamp(6px, 2.2vh, 24px) clamp(14px, 4vw, 28px);
+}
+
+.welcome-hero-left,
+.welcome-hero-right {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.8vh, 20px);
+  width: 100%;
+}
+
+.welcome-hero-left {
+  text-align: center;
+}
+
+.welcome-logo {
+  width: clamp(28px, min(10vw, 5vh), 56px);
+  height: auto;
+}
+
+.welcome-logo-divider {
+  display: none;
+  width: clamp(36px, min(6vw, 5vh), 84px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--metallic-gold), transparent);
+}
+
+.welcome-copy p {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(0.78rem, min(3.9vw, 1.7vh), 1.25rem);
+  line-height: 1.26;
+  color: var(--ivory);
+}
+
+.welcome-rsvp-btn {
+  padding: clamp(7px, min(2.2vw, 1.1vh), 15px) clamp(16px, min(3.2vw, 2.6vh), 34px);
+  min-height: 0;
+  font-size: clamp(0.68rem, min(2.2vw, 1.1vh), 1rem);
+}
+
+.welcome-details-pad {
+  position: relative;
+  display: block;
+  max-width: clamp(190px, min(60vw, 22vh), 330px);
+  padding: clamp(6px, min(1.7vw, 1.05vh), 13px) clamp(14px, min(2.4vw, 2vh), 28px);
+  clip-path: polygon(4% 0%, 96% 0%, 100% 18%, 100% 82%, 96% 100%, 4% 100%, 0% 82%, 0% 18%);
+  background: linear-gradient(160deg, rgba(255, 249, 239, 0.14), rgba(255, 249, 239, 0.05));
+  color: rgba(255, 249, 239, 0.9);
+  font-size: clamp(0.6rem, min(1.8vw, 0.95vh), 0.8rem);
+  line-height: 1.25;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.welcome-details-pad::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(4% 0%, 96% 0%, 100% 18%, 100% 82%, 96% 100%, 4% 100%, 0% 82%, 0% 18%);
+  border: 1px solid rgba(201, 162, 75, 0.55);
+  pointer-events: none;
+}
+
+.welcome-details-pad:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(160deg, rgba(255, 249, 239, 0.22), rgba(255, 249, 239, 0.08));
+}
+
+/* Hidden only on the most cramped short-viewport phones (see compact
+   media query below) to guarantee zero scroll on every device. */
+.welcome-hero--hide-pad {
+  display: block;
+}
+
+.welcome-cluster {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(6px, 3vh, 20px);
+}
+
+.welcome-invite {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: clamp(76px, min(36vw, 27vh), 210px);
+  transform: rotate(4deg);
+  filter: drop-shadow(0 18px 32px rgba(20, 6, 10, 0.45));
+}
+
+.welcome-story {
+  position: absolute;
+  z-index: 2;
+  left: 4%;
+  bottom: -9%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3px, 0.8vh, 8px);
+  padding: clamp(4px, 1vh, 10px) clamp(4px, 1vh, 10px) clamp(6px, 1.2vh, 12px);
+  background: var(--white);
+  border-radius: calc(var(--radius) - 2px);
+  box-shadow: 0 16px 34px rgba(20, 6, 10, 0.4);
+  transform: rotate(-6deg);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.welcome-story:hover {
+  transform: rotate(-6deg) translateY(-3px);
+  box-shadow: 0 20px 40px rgba(20, 6, 10, 0.48);
+}
+
+.welcome-story-photo {
+  display: block;
+  width: clamp(58px, min(13vw, 16vh), 155px);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.welcome-story-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.welcome-story-caption {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(0.54rem, min(1.4vw, 1.2vh), 0.95rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+
+/* --- Tier 2: two-column layout, width >= 700px --- */
+@media (min-width: 700px) {
+  .welcome-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(16px, 3.4vw, 56px);
+    padding: clamp(6px, 2.2vh, 24px) clamp(18px, 4vw, 50px);
+  }
+
+  .welcome-hero-bouquet {
+    display: block;
+    width: clamp(220px, 30vw, 560px);
+  }
+
+  .welcome-hero-left,
+  .welcome-hero-right {
+    height: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .welcome-hero-right {
+    align-items: center;
+  }
+
+  .welcome-logo-divider {
+    display: block;
+  }
+
+  .welcome-cluster {
+    margin-bottom: 0;
+  }
+
+  /* Roomy: height >= 480px (typical laptops, tablets, desktops) */
+  .welcome-logo {
+    width: clamp(34px, min(6.5vw, 7.5vh), 92px);
+  }
+
+  .welcome-copy p {
+    font-size: clamp(1rem, min(2.6vw, 3vh), 2.6rem);
+    line-height: 1.22;
+  }
+
+  .welcome-rsvp-btn {
+    padding: clamp(8px, min(1.8vw, 1.4vh), 20px) clamp(20px, min(3.6vw, 3vh), 40px);
+    font-size: clamp(0.8rem, min(1.9vw, 1.6vh), 1.35rem);
+  }
+
+  .welcome-details-pad {
+    max-width: clamp(200px, min(30vw, 24vh), 400px);
+    padding: clamp(8px, min(1.8vw, 1.5vh), 20px) clamp(16px, min(2.6vw, 2.2vh), 32px);
+    font-size: clamp(0.62rem, min(1.4vw, 1.2vh), 1rem);
+  }
+
+  .welcome-invite {
+    height: clamp(160px, min(48vw, 58vh), 620px);
+  }
+
+  .welcome-story-photo {
+    width: clamp(80px, min(19vw, 26vh), 300px);
+  }
+}
+
+/* Tier 2, compact: width >= 700px but height < 480px (landscape phones,
+   short browser windows) — pull back from "roomy" sizing to stay safe. */
+@media (min-width: 700px) and (max-height: 479px) {
+  .welcome-logo {
+    width: clamp(28px, min(5vw, 5.5vh), 60px);
+  }
+
+  .welcome-copy p {
+    font-size: clamp(0.75rem, min(1.8vw, 1.9vh), 1.3rem);
+    line-height: 1.26;
+  }
+
+  .welcome-rsvp-btn {
+    padding: clamp(5px, min(1.2vw, 0.9vh), 12px) clamp(16px, min(3.2vw, 2.6vh), 34px);
+    font-size: clamp(0.62rem, min(1.3vw, 1.1vh), 0.9rem);
+  }
+
+  .welcome-details-pad {
+    max-width: clamp(170px, min(24vw, 16vh), 300px);
+    padding: clamp(5px, min(1.2vw, 1vh), 12px) clamp(14px, min(2.4vw, 2vh), 28px);
+    font-size: clamp(0.52rem, min(1.1vw, 0.85vh), 0.72rem);
+  }
+
+  .welcome-invite {
+    height: clamp(90px, min(26vw, 32vh), 260px);
+  }
+
+  .welcome-story-photo {
+    width: clamp(48px, min(11vw, 14vh), 130px);
+  }
+}
+
+/* Tier 1, compact: width < 700px AND height < 620px — landscape phones and
+   short/squarish resized browser windows. Drop the details pad and pull
+   back from the enlarged default sizing rather than shrink everything
+   past legibility. */
+@media (max-width: 699.98px) and (max-height: 619.98px) {
+  .welcome-hero-inner {
+    gap: clamp(2px, 0.6vh, 8px);
+  }
+
+  .welcome-hero-left,
+  .welcome-hero-right {
+    gap: clamp(2px, 0.6vh, 8px);
+  }
+
+  .welcome-logo {
+    width: clamp(20px, min(8vw, 4.2vh), 40px);
+  }
+
+  .welcome-copy p {
+    font-size: clamp(0.62rem, min(3.2vw, 1.4vh), 0.95rem);
+  }
+
+  .welcome-rsvp-btn {
+    padding: clamp(3px, min(1.8vw, 0.8vh), 9px) clamp(16px, min(3.2vw, 2.6vh), 34px);
+    font-size: clamp(0.58rem, min(1.8vw, 0.9vh), 0.8rem);
+  }
+
+  .welcome-invite {
+    height: clamp(52px, min(28vw, 20vh), 140px);
+  }
+
+  .welcome-story-photo {
+    width: clamp(48px, min(11vw, 14vh), 130px);
+  }
+
+  .welcome-hero--hide-pad {
+    display: none;
+  }
+}
+
+.welcome-countdown {
+  flex: 0 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: var(--ivory);
+  min-height: clamp(42px, 15vh, 190px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(6px, 1.4vh, 18px) clamp(16px, 4vw, 56px);
+}
+
+.welcome-countdown-flower {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  max-width: none;
+}
+
+.welcome-countdown-flower--bouquet {
+  top: -12%;
+  right: -4%;
+  width: clamp(90px, 14vh, 200px);
+}
+
+.welcome-countdown-flower--rose {
+  bottom: -14%;
+  left: -4%;
+  width: clamp(80px, 12vh, 170px);
+}
+
+.welcome-countdown-inner {
+  position: relative;
+  z-index: 1;
+  width: min(720px, calc(100% - 32px));
+  margin: 0 auto;
+  text-align: center;
+}
+
+.welcome-countdown-inner .countdown-eyebrow {
+  margin: 0 0 clamp(4px, 1vh, 14px);
+  font-size: clamp(0.6rem, 1.3vh, 0.8rem);
+}
+
+.welcome-countdown-inner .countdown-unit strong {
+  font-size: clamp(1.4rem, 4.6vh, 2.6rem);
+}
+
+.welcome-countdown-inner .countdown-unit span {
+  font-size: clamp(0.5rem, 0.85vh, 0.7rem);
+}
+
+.welcome-countdown-inner .countdown-divider {
+  height: clamp(22px, 4vh, 36px);
 }

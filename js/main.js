@@ -109,12 +109,29 @@ const galleryImages = [
   "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.10.jpeg"
 ];
 
+// The Harold & Somadina folder holds full-resolution camera originals
+// (2-5MB+ each). Pre-optimized derivatives live alongside them so the
+// gallery grid, scattered polaroids, and viewer never have to load a
+// multi-megabyte file just to show a photo: a ~400px-wide thumbnail for
+// small display sizes, and a ~1600px-wide "large" version for the main
+// viewer stage. galleryImages itself stays the canonical list of
+// original paths (used as stable identifiers), and these two helpers
+// map an original path to its optimized counterpart.
+function toThumbSrc(src) {
+  return src.replace("Harold & Somadina/", "assets/gallery-thumb/");
+}
+
+function toLargeSrc(src) {
+  return src.replace("Harold & Somadina/", "assets/gallery-large/");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   setupEnvelopeGate();
   setupNavigation();
   setupCountdown();
   setupGallery();
   setupLightbox();
+  setupStoryPhotoViewer();
   setupFaqs();
   setupCopyButtons();
   setupRsvpDeadline();
@@ -204,7 +221,7 @@ function setupGallery() {
 
   gallery.innerHTML = uniqueImages.map((src, index) => (
     `<button class="gallery-item" type="button" data-lightbox-index="${index}" aria-label="Open gallery image ${index + 1}">
-      <img src="${src}" alt="Somadina and Ofure wedding photo ${index + 1}" loading="lazy">
+      <img src="${toThumbSrc(src)}" alt="Somadina and Ofure wedding photo ${index + 1}" loading="lazy">
     </button>`
   )).join("");
 }
@@ -223,7 +240,7 @@ function setupLightbox() {
 
   const open = (index) => {
     currentIndex = index;
-    image.src = uniqueImages[currentIndex];
+    image.src = toLargeSrc(uniqueImages[currentIndex]);
     image.alt = `Somadina and Ofure wedding photo ${currentIndex + 1}`;
     lightbox.classList.add("open");
     lightbox.setAttribute("aria-hidden", "false");
@@ -237,7 +254,7 @@ function setupLightbox() {
   };
 
   const renderImage = () => {
-    image.src = uniqueImages[currentIndex];
+    image.src = toLargeSrc(uniqueImages[currentIndex]);
     image.alt = `Somadina and Ofure wedding photo ${currentIndex + 1}`;
   };
 
@@ -261,6 +278,95 @@ function setupLightbox() {
   document.addEventListener("keydown", (event) => {
     if (!lightbox.classList.contains("open")) return;
     if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowLeft") move(-1);
+    if (event.key === "ArrowRight") move(1);
+  });
+}
+
+function setupStoryPhotoViewer() {
+  const viewer = document.querySelector("[data-photo-viewer]");
+  if (!viewer) return;
+
+  const openBtn = document.querySelector("[data-open-viewer]");
+  const scatterButtons = document.querySelectorAll("[data-viewer-src]");
+  const stage = viewer.querySelector("[data-viewer-image]");
+  const strip = viewer.querySelector("[data-viewer-strip]");
+  const closeBtn = viewer.querySelector("[data-viewer-close]");
+  const prevBtn = viewer.querySelector("[data-viewer-prev]");
+  const nextBtn = viewer.querySelector("[data-viewer-next]");
+
+  // Shuffle a copy of the shared gallery list (Fisher-Yates) so the
+  // filmstrip order is randomized fresh each time the page loads.
+  const viewerImages = [...new Set(galleryImages)];
+  for (let i = viewerImages.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [viewerImages[i], viewerImages[j]] = [viewerImages[j], viewerImages[i]];
+  }
+
+  let currentIndex = 0;
+
+  strip.innerHTML = viewerImages.map((src, index) => (
+    `<button class="viewer-thumb" type="button" data-thumb-index="${index}" aria-label="View photo ${index + 1}">
+      <img src="${toThumbSrc(src)}" alt="" loading="lazy">
+    </button>`
+  )).join("");
+
+  const thumbs = strip.querySelectorAll("[data-thumb-index]");
+
+  const render = () => {
+    const src = viewerImages[currentIndex];
+    stage.src = toLargeSrc(src);
+    stage.alt = `Somadina and Ofure wedding photo ${currentIndex + 1}`;
+    thumbs.forEach((thumb) => thumb.classList.remove("active"));
+    const activeThumb = thumbs[currentIndex];
+    if (activeThumb) {
+      activeThumb.classList.add("active");
+      activeThumb.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+  };
+
+  const openAt = (index) => {
+    currentIndex = ((index % viewerImages.length) + viewerImages.length) % viewerImages.length;
+    render();
+    viewer.classList.add("open");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  const openBySrc = (src) => {
+    const index = viewerImages.indexOf(src);
+    openAt(index === -1 ? 0 : index);
+  };
+
+  const closeViewer = () => {
+    viewer.classList.remove("open");
+    viewer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  const move = (direction) => openAt(currentIndex + direction);
+
+  if (openBtn) openBtn.addEventListener("click", () => openAt(0));
+
+  scatterButtons.forEach((button) => {
+    button.addEventListener("click", () => openBySrc(button.dataset.viewerSrc));
+  });
+
+  strip.addEventListener("click", (event) => {
+    const thumb = event.target.closest("[data-thumb-index]");
+    if (thumb) openAt(Number(thumb.dataset.thumbIndex));
+  });
+
+  closeBtn.addEventListener("click", closeViewer);
+  prevBtn.addEventListener("click", () => move(-1));
+  nextBtn.addEventListener("click", () => move(1));
+  viewer.addEventListener("click", (event) => {
+    if (event.target === viewer) closeViewer();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!viewer.classList.contains("open")) return;
+    if (event.key === "Escape") closeViewer();
     if (event.key === "ArrowLeft") move(-1);
     if (event.key === "ArrowRight") move(1);
   });
