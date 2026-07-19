@@ -2,112 +2,53 @@ const WEDDING_DATE = new Date("2026-11-27T10:00:00+01:00");
 const RSVP_DEADLINE = new Date("2026-08-10T23:59:59+01:00");
 
 const galleryImages = [
-  "Harold & Somadina/JH Intro-64.jpg",
-  "Harold & Somadina/JH Intro-96.jpg",
-  "Harold & Somadina/JH Intro-98.jpg",
-  "Harold & Somadina/JH Intro-61.jpg",
-  "Harold & Somadina/JH Intro-62.jpg",
-  "Harold & Somadina/JH Intro-63.jpg",
-  "Harold & Somadina/JH Intro-104.jpg",
-  "Harold & Somadina/JH Intro-127.jpg",
-  "Harold & Somadina/JH Intro-101.jpg",
-  "Harold & Somadina/JH Intro-95.jpg",
-  "Harold & Somadina/JH Intro-128.jpg",
-  "Harold & Somadina/JH Intro-102.jpg",
-  "Harold & Somadina/JH Intro-103.jpg",
-  "Harold & Somadina/JH Intro-235.jpg",
-  "Harold & Somadina/JH Intro-234.jpg",
-  "Harold & Somadina/JH Intro-233.jpg",
-  "Harold & Somadina/JH Intro-255.jpg",
-  "Harold & Somadina/JH Intro-254.jpg",
-  "Harold & Somadina/JH Intro-251.jpg",
-  "Harold & Somadina/JH Intro-229.jpg",
-  "Harold & Somadina/JH Intro-228.jpg",
-  "Harold & Somadina/JH Intro-227.jpg",
-  "Harold & Somadina/JH Intro-232.jpg",
-  "Harold & Somadina/JH Intro-231.jpg",
-  "Harold & Somadina/JH Intro-230.jpg",
-  "Harold & Somadina/JH Intro-330.jpg",
-  "Harold & Somadina/JH Intro-339.jpg",
-  "Harold & Somadina/JH Intro-338.jpg",
-  "Harold & Somadina/JH Intro-337.jpg",
-  "Harold & Somadina/JH Intro-342.jpg",
-  "Harold & Somadina/JH Intro-137.jpg",
-  "Harold & Somadina/JH Intro-161.jpg",
-  "Harold & Somadina/JH Intro-162.jpg",
-  "Harold & Somadina/JH Intro-163.jpg",
-  "Harold & Somadina/JH Intro-164.jpg",
-  "Harold & Somadina/JH Intro-165.jpg",
-  "Harold & Somadina/JH Intro-166.jpg",
-  "Harold & Somadina/JH Intro-167.jpg",
-  "Harold & Somadina/JH Intro-168.jpg",
-  "Harold & Somadina/JH Intro-169.jpg",
-  "Harold & Somadina/JH Intro-170.jpg",
-  "Harold & Somadina/JH Intro-171.jpg",
-  "Harold & Somadina/JH Intro-172.jpg",
-  "Harold & Somadina/JH Intro-173.jpg",
-  "Harold & Somadina/JH Intro-174.jpg",
-  "Harold & Somadina/JH Intro-175.jpg",
-  "Harold & Somadina/JH Intro-176.jpg",
-  "Harold & Somadina/JH Intro-177.jpg",
-  "Harold & Somadina/JH Intro-178.jpg",
-  "Harold & Somadina/JH Intro-179.jpg",
-  "Harold & Somadina/JH Intro-180.jpg",
-  "Harold & Somadina/JH Intro-181.jpg",
-  "Harold & Somadina/JH Intro-182.jpg",
-  "Harold & Somadina/JH Intro-183.jpg",
-  "Harold & Somadina/JH Intro-184.jpg",
-  "Harold & Somadina/JH Intro-185.jpg",
-  "Harold & Somadina/JH Intro-186.jpg",
-  "Harold & Somadina/JH Intro-187.jpg",
-  "Harold & Somadina/JH Intro-188.jpg",
-  "Harold & Somadina/JH Intro-216.jpg",
-  "Harold & Somadina/JH Intro-217.jpg",
-  "Harold & Somadina/JH Intro-218.jpg",
-  "Harold & Somadina/JH Intro-219.jpg",
-  "Harold & Somadina/JH Intro-220.jpg",
-  "Harold & Somadina/JH Intro-221.jpg",
-  "Harold & Somadina/JH Intro-222.jpg",
-  "Harold & Somadina/JH Intro-223.jpg",
-  "Harold & Somadina/JH Intro-224.jpg",
-  "Harold & Somadina/JH Intro-225.jpg",
-  "Harold & Somadina/JH Intro-226.jpg",
-  "Harold & Somadina/JH Intro-250.jpg",
-  "Harold & Somadina/JH Intro-252.jpg",
-  "Harold & Somadina/JH Intro-253.jpg",
-  "Harold & Somadina/JH Intro-331.jpg",
-  "Harold & Somadina/JH Intro-332.jpg",
-  "Harold & Somadina/JH Intro-333.jpg",
-  "Harold & Somadina/JH Intro-334.jpg",
-  "Harold & Somadina/JH Intro-335.jpg",
-  "Harold & Somadina/JH Intro-336.jpg",
-  "Harold & Somadina/JH Intro-340.jpg",
-  "Harold & Somadina/JH Intro-341.jpg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.22 (1).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.22 (2).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.22.jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.23 (1).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.23 (2).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.23 (3).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.23.jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.24 (1).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.24 (2).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.24 (3).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.24.jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-24 at 17.33.25.jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.07.jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.08 (1).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.08 (2).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.08 (3).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.08.jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.09 (1).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.09 (2).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.09.jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.10 (1).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.10 (2).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.10 (3).jpeg",
-  "Harold & Somadina/WhatsApp Image 2026-06-25 at 08.37.10.jpeg"
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02.jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02 (1).jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02 (2).jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02 (3).jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02 (4).jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03.jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03 (1).jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03 (2).jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03 (3).jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03 (4).jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.04.jpeg",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.04 (1).jpeg",
+  "Harold & Somadina/Igba Nkwu/IMG_3104.PNG",
+  "Harold & Somadina/Igba Nkwu/IMG_3105.PNG",
+  "Harold & Somadina/Igba Nkwu/IMG_3106.PNG",
+  "Harold & Somadina/Igba Nkwu/IMG_3107.JPEG",
+  "Harold & Somadina/Igba Nkwu/IMG_3108.JPEG",
+  "Harold & Somadina/Igba Nkwu/IMG_3109.JPEG"
 ];
+
+// Stable, permanent labels shown at the top of the photo viewer. These are
+// tied to the photo itself (not to its position in the shuffled filmstrip),
+// so a given photo always shows the same title no matter the browse order.
+const galleryTitles = {
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02.jpeg": "Image 01",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02 (1).jpeg": "Image 02",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02 (2).jpeg": "Image 03",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02 (3).jpeg": "Image 04",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.02 (4).jpeg": "Image 05",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03.jpeg": "Image 06",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03 (1).jpeg": "Image 07",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03 (2).jpeg": "Image 08",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03 (3).jpeg": "Image 09",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.03 (4).jpeg": "Image 10",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.04.jpeg": "Image 11",
+  "Harold & Somadina/WhatsApp Image 2026-07-17 at 14.45.04 (1).jpeg": "Image 12",
+  "Harold & Somadina/Igba Nkwu/IMG_3104.PNG": "Igba Nkwu",
+  "Harold & Somadina/Igba Nkwu/IMG_3105.PNG": "Igba Nkwu",
+  "Harold & Somadina/Igba Nkwu/IMG_3106.PNG": "Igba Nkwu",
+  "Harold & Somadina/Igba Nkwu/IMG_3107.JPEG": "Igba Nkwu",
+  "Harold & Somadina/Igba Nkwu/IMG_3108.JPEG": "Igba Nkwu",
+  "Harold & Somadina/Igba Nkwu/IMG_3109.JPEG": "Igba Nkwu"
+};
+
+function getPhotoTitle(src) {
+  return galleryTitles[src] || "";
+}
 
 // The Harold & Somadina folder holds full-resolution camera originals
 // (2-5MB+ each). Pre-optimized derivatives live alongside them so the
@@ -118,11 +59,13 @@ const galleryImages = [
 // original paths (used as stable identifiers), and these two helpers
 // map an original path to its optimized counterpart.
 function toThumbSrc(src) {
-  return src.replace("Harold & Somadina/", "assets/gallery-thumb/");
+  const rel = src.replace("Harold & Somadina/", "").replace(/\.[^./]+$/, "");
+  return `assets/gallery-thumb/${rel}.jpg`;
 }
 
 function toLargeSrc(src) {
-  return src.replace("Harold & Somadina/", "assets/gallery-large/");
+  const rel = src.replace("Harold & Somadina/", "").replace(/\.[^./]+$/, "");
+  return `assets/gallery-large/${rel}.jpg`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -290,6 +233,7 @@ function setupStoryPhotoViewer() {
   const openBtn = document.querySelector("[data-open-viewer]");
   const scatterButtons = document.querySelectorAll("[data-viewer-src]");
   const stage = viewer.querySelector("[data-viewer-image]");
+  const titleEl = viewer.querySelector("[data-viewer-title]");
   const strip = viewer.querySelector("[data-viewer-strip]");
   const closeBtn = viewer.querySelector("[data-viewer-close]");
   const prevBtn = viewer.querySelector("[data-viewer-prev]");
@@ -317,6 +261,7 @@ function setupStoryPhotoViewer() {
     const src = viewerImages[currentIndex];
     stage.src = toLargeSrc(src);
     stage.alt = `Somadina and Ofure wedding photo ${currentIndex + 1}`;
+    if (titleEl) titleEl.textContent = getPhotoTitle(src);
     thumbs.forEach((thumb) => thumb.classList.remove("active"));
     const activeThumb = thumbs[currentIndex];
     if (activeThumb) {

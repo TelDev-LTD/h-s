@@ -372,6 +372,20 @@ h3 {
   color: var(--muted-text);
 }
 
+.info-grid {
+  margin-top: 8px;
+}
+
+.info-item {
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.info-item p:last-child {
+  color: var(--muted-text);
+  margin: 0;
+}
+
 .gallery-grid {
   column-count: 1;
   column-gap: 14px;
@@ -528,6 +542,19 @@ h3 {
 
 .photo-viewer.open {
   display: flex;
+}
+
+.photo-viewer-title {
+  flex: 0 0 auto;
+  margin: 0 0 12px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1rem, 2.4vw, 1.6rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--metallic-gold);
+  text-align: center;
+  min-height: 1.2em;
 }
 
 .photo-viewer-stage {
@@ -1435,7 +1462,7 @@ body.welcome-page .site-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: clamp(6px, 3vh, 20px);
+  margin-bottom: clamp(15px, 7.5vh, 50px);
 }
 
 .welcome-invite {
@@ -1450,8 +1477,8 @@ body.welcome-page .site-header {
 .welcome-story {
   position: absolute;
   z-index: 2;
-  left: 4%;
-  bottom: -9%;
+  left: -6%;
+  bottom: -23%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1491,6 +1518,17 @@ body.welcome-page .site-header {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--burgundy);
+}
+
+/* Tier 1 (mobile, stacked layout): the polaroid needs a deeper drop than
+   on desktop to clear the invite's printed date line, since the invite
+   is proportionally much smaller here and the polaroid takes up a
+   bigger share of its height. Confirmed against the margin-bottom
+   overhang reserve on .welcome-cluster across common phone sizes. */
+@media (max-width: 699.98px) {
+  .welcome-story {
+    bottom: -30%;
+  }
 }
 
 /* --- Tier 2: two-column layout, width >= 700px --- */
@@ -1549,11 +1587,11 @@ body.welcome-page .site-header {
   }
 
   .welcome-invite {
-    height: clamp(160px, min(48vw, 58vh), 620px);
+    height: clamp(150px, min(42vw, 50vh), 580px);
   }
 
   .welcome-story-photo {
-    width: clamp(80px, min(19vw, 26vh), 300px);
+    width: clamp(74px, min(16vw, 22vh), 250px);
   }
 }
 
